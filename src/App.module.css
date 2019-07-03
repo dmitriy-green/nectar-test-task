@@ -1,0 +1,16 @@
+.app {
+  padding: 10px;
+}
+
+.logoImage {
+  display: inline-block;
+  pointer-events: none;
+  width: 80px;
+  vertical-align: middle;
+}
+
+.logoText {
+  display: inline-block;
+  font-size: 20px;
+  vertical-align: middle;
+}

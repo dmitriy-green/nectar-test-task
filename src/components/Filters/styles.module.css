@@ -1,0 +1,11 @@
+.list {
+    display: flex;
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.listItem {
+    margin-right: 10px;
+    text-transform: capitalize;
+}
