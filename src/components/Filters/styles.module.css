@@ -1,3 +1,7 @@
+.wrap {
+
+}
+
 .list {
     display: flex;
     border: 1px solid #999;
@@ -8,4 +12,10 @@
 .listItem {
     margin-right: 10px;
     text-transform: capitalize;
+}
+
+@media (max-width: 1024px) {
+    .listItem:nth-child(2) ~ .listItem:not(.moreFilters) {
+        display: none;
+    }
 }

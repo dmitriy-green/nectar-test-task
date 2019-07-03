@@ -2,12 +2,12 @@ import { createReducer } from 'redux-starter-kit'
 import * as actions from '../actions'
 
 const initialState = {
-  filterPopupId: null
+  dropdownFilterName: null
 };
 
 export default createReducer(initialState, {
-  [actions.showFilterPopup]: (state, action) => ({
+  [actions.openDropdown]: (state, action) => ({
     ...state,
-    filterPopupId: action.payload
+    dropdownFilterName: action.payload
   })
 })
