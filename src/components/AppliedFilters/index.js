@@ -23,7 +23,7 @@ class AppliedFilters extends PureComponent {
       <div className={styles.appliedFilters}>
         <span className={styles.description}>Applied Filters: </span>
         {items.length === 0
-          ? '- none -'
+          ? <span className={styles.noneText}>- none -</span>
           : (
             <React.Fragment>
               <ul className={styles.list}>

@@ -26,9 +26,18 @@
   height: 28px;
 }
 
-.description {
+.description,
+.noneText {
+  display: inline-block;
   font-weight: 700;
   margin-right: 10px;
+  height: 30px;
+  margin-top: 6px;
+  vertical-align: top;
+}
+
+.noneText {
+  font-weight: 400;
 }
 
 .button {
