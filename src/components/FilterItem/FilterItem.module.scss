@@ -1,0 +1,111 @@
+.filterItem {
+    &.selected {
+        &:after {
+            background: #fff;
+            content: '';
+            display: block;
+            position: relative;
+            transform: rotate(-135deg);
+            height: 14px;
+            width: 14px;
+            box-shadow: 1px 1px 0 0 #999;
+            top: 29px;
+            left: 50%;
+            margin-left: -5px;
+            margin-top: -15px;
+        }
+    }
+}
+
+.filterItemButton,
+.subFilterItemButton {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px 15px;
+    text-transform: capitalize;
+
+    &.active {
+        border-color: #ff0000;
+    }
+
+    &.selected {
+        border-color: #ff0000;
+        box-shadow: 0 0 1px 0 red;
+    }
+}
+
+.subFilterItemList {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+    width: 276px;
+}
+
+.subFilterItem {
+    margin: 5px;
+}
+
+.actions {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: 20px 10px 10px 10px;
+}
+
+@media (max-width: 920px) {
+    .filterItemButton {
+        width: 100%;
+        padding: 5px;
+    }
+
+    .subFilterItemList {
+        width: 100%;
+    }
+
+    .subFilterItemButton {
+        padding: 15px;
+    }
+
+    :global(.moreItemsDropdown) {
+        .subFilterItemList {
+            width: 100%;
+        }
+
+        .filterItemButton {
+            border: none;
+            font-size: 18px;
+            text-align: left;
+            width: 100%;
+            padding: 10px;
+            line-height: 32px;
+            box-shadow: none;
+
+            &:after {
+                content: '+';
+                float: right;
+                font-size: 20px;
+            }
+
+            &.selected {
+                &:after {
+                    content: '-';
+                    font-size: 26px;
+                }
+            }
+
+            &.active {
+                color: #ff0000;
+            }
+        }
+
+        .subFilterItemButton {
+            border: 1px solid #ddd;
+            padding: 15px;
+
+            &.active {
+                border-color: #ff0000;
+            }
+        }
+    }
+}

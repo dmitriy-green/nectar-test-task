@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import styles from './styles.module.scss'
+import styles from './Dropdown.module.scss'
 
 const Dropdown = ({ children, className }) => (
   <div className={classnames(styles.dropdown, className )}>{children}</div>

@@ -18,3 +18,9 @@
   font-size: 20px;
   vertical-align: middle;
 }
+
+@media (max-width: 600px) {
+  .app {
+    font-size: 13px;
+  }
+}

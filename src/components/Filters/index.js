@@ -3,44 +3,66 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import FilterItem from '../FilterItem';
 import Button from '../Button';
-import styles from './styles.module.scss';
+import styles from './Filters.module.scss';
 import Dropdown from '../Dropdown';
-import { connect } from 'react-redux';
-import { showMoreFilters } from '../../actions';
 import * as constants from '../../constants';
 
 class Filters extends PureComponent {
-  renderFilterList(insideMoreFilters) {
-    const { filters } = this.props;
-    let keys = Object.keys(filters);
-    keys = insideMoreFilters ? keys.slice(constants.VISIBLE_FILTERS_QUANTITY_ON_MOBILE, keys.length) : keys;
+  getMoreFiltersKeyList() {
+    const keys = Object.keys(this.props.filters);
 
-    return keys.map(name => (
+    return keys.slice(constants.VISIBLE_FILTERS_QUANTITY_ON_MOBILE, keys.length);
+  }
+
+  renderFilterList(insideMoreFiltersDropdown) {
+    const {
+      filters, dropdownFilterName, selectedFilters, openDropdown, selectFilter, applyFilters, cancelFilters
+    } = this.props;
+    let list = insideMoreFiltersDropdown ? this.getMoreFiltersKeyList() : Object.keys(filters);
+    const props = { dropdownFilterName, selectedFilters, openDropdown, selectFilter, applyFilters, cancelFilters };
+
+
+    return list.map(name => (
       <li key={name} className={styles.listItem}>
         <FilterItem
           name={name}
           filter={filters[name]}
-          insideMoreFilters={insideMoreFilters}
+          insideMoreFilters={insideMoreFiltersDropdown}
+          {...props}
         />
       </li>
     ));
   }
 
   render() {
-    const { displayingMoreFilters } = this.props;
+    const { displayingMoreFilters, selectedFilters, filters } = this.props;
     const filterList = this.renderFilterList(false);
-    const filterListInsideMoreFilters = this.renderFilterList(true);
+    const filterListInsideMoreFiltersDropdown = this.renderFilterList(true);
+    const moreFiltersActive = this.getMoreFiltersKeyList()
+      .reduce(
+        (acc, currVal) => acc.concat(filters[currVal]),
+        []
+      )
+      .some(item => selectedFilters.some(s => s.id === item.id));
 
     return (
       <div className={styles.wrap}>
         <ul className={styles.list}>
           {filterList}
           <li className={classnames(styles.listItem, styles.moreFilters)}>
-            <Button onClick={() => this.props.showMoreFilters()}>More filters</Button>
+            <Button
+              onClick={() => this.props.showMoreFilters()}
+              className={classnames(
+                styles.moreFilters,
+                { [styles.selected]: displayingMoreFilters, [styles.active]: moreFiltersActive }
+              )}
+            >
+              More filters
+            </Button>
             {displayingMoreFilters &&
             <Dropdown className='moreItemsDropdown'>
               <ul className={styles.moreFiltersList}>
-                {filterListInsideMoreFilters}
+                {filterListInsideMoreFiltersDropdown}
               </ul>
             </Dropdown>}
           </li>
@@ -52,14 +74,15 @@ class Filters extends PureComponent {
 
 Filters.propTypes = {
   filters: PropTypes.object,
-  displayingMoreFilters: PropTypes.bool
+  displayingMoreFilters: PropTypes.bool,
+  selectedFilters: PropTypes.array,
+  removeFilters: PropTypes.func,
+  openDropdown: PropTypes.func,
+  selectFilter: PropTypes.func,
+  applyFilters: PropTypes.func,
+  cancelFilter: PropTypes.func,
+  showMoreFilters: PropTypes.func,
+  cancelFilters: PropTypes.func
 };
 
-export default connect(
-  (state) => ({
-    displayingMoreFilters: state.displayingMoreFilters
-  }),
-  {
-    showMoreFilters
-  }
-)(Filters);
+export default Filters

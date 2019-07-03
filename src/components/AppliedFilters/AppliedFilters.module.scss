@@ -1,0 +1,36 @@
+.appliedFilters {
+  margin-top: 20px;
+}
+
+.list {
+  display: inline;
+}
+
+.item {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.title {
+  padding: 5px 10px;
+  display: inline-block;
+}
+
+.removeFilter {
+  background: none;
+  border: none;
+  border-left: 1px solid #ddd;
+  height: 28px;
+}
+
+.description {
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.button {
+  height: 30px;
+}

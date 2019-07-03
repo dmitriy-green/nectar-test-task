@@ -1,55 +1,69 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classnames from 'classnames'
-import { openDropdown } from '../../actions';
 import Dropdown from '../Dropdown';
 import Button from '../Button';
-import styles from './styles.module.scss';
+import styles from './FilterItem.module.scss';
 
 class FilterItem extends PureComponent {
   render() {
-    const { name, filter, dropdownFilterName, insideMoreFilters, openDropdown } = this.props;
+    const { name, filter, selectedFilters, dropdownFilterName, insideMoreFilters, openDropdown, selectFilter } = this.props;
     const selected = dropdownFilterName === name;
+    const active = selectedFilters.some(s => filter.some(f => s.id === f.id));
 
     return (
-      <div className={styles.filterItem}>
+      <div className={classnames(styles.filterItem, { [styles.selected]: selected })}>
         <Button
-          className={classnames(styles.filterItemButton, { [styles.selected]: selected })}
+          className={classnames(
+            styles.filterItemButton, { [styles.selected]: selected, [styles.active]: active })}
           onClick={() => openDropdown({ filterName: name, closeMoreFilters: !insideMoreFilters })}
         >
           {name}
         </Button>
-        {dropdownFilterName === name &&
-        <Dropdown>
-          <ul className={styles.subFilterItemsList}>
-            {filter.map(subFilter => (
-              <li key={subFilter.id} className={styles.subFilterItem}>
-                <Button className={classnames(styles.subFilterItemButton)}>
-                  {subFilter.title}
-                </Button>
-              </li>
-            ))}
-          </ul>
-        </Dropdown>}
+        {dropdownFilterName === name && (
+          <Dropdown>
+            <ul className={styles.subFilterItemList}>
+              {filter.map(subFilter => (
+                <li key={subFilter.id} className={styles.subFilterItem}>
+                  <Button
+                    className={classnames(
+                      styles.subFilterItemButton,
+                      { [styles.active]: selectedFilters.some(s => s.id === subFilter.id) }
+                    )}
+                    onClick={() => selectFilter(subFilter)}
+                  >
+                    {subFilter.title}
+                  </Button>
+                </li>
+              ))}
+            </ul>
+            <div className={styles.actions}>
+              <Button onClick={() => this.props.applyFilters()}>Apply</Button>
+              {active && <Button onClick={() => this.props.cancelFilters(filter)}>Cancel</Button>}
+            </div>
+          </Dropdown>
+        )}
       </div>
     );
   }
 }
 
 FilterItem.propTypes = {
+  dropdownFilterName: PropTypes.string,
   name: PropTypes.string,
   filter: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     title: PropTypes.string
   })),
   insideMoreFilters: PropTypes.bool,
-  openDropdown: PropTypes.func
+  selectedFilters: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string
+  })),
+  openDropdown: PropTypes.func,
+  selectFilter: PropTypes.func,
+  cancelFilters: PropTypes.func,
+  applyFilters: PropTypes.func
 };
 
-export default connect(
-  (state) => ({
-    dropdownFilterName: state.dropdownFilterName
-  }),
-  { openDropdown }
-)(FilterItem);
+export default FilterItem
