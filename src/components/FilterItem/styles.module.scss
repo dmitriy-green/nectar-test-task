@@ -1,0 +1,54 @@
+.filterItemButton,
+.subFilterItemButton {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px 15px;
+    text-transform: capitalize;
+}
+
+.subFilterItemsList {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+    width: 276px;
+}
+
+.subFilterItem {
+    margin: 5px;
+}
+
+
+@media (max-width: 1024px) {
+    :global(.moreItemsDropdown) {
+        .subFilterItemsList {
+            width: 100%;
+        }
+
+        .filterItemButton {
+            border: none;
+            font-size: 18px;
+            text-align: left;
+            width: 100%;
+            padding: 10px;
+
+            &:after {
+                content: '+';
+                float: right;
+                font-size: 20px;
+            }
+
+            &.selected {
+                &:after {
+                    content: '-';
+                    font-size: 26px;
+                }
+            }
+        }
+
+        .subFilterItemButton {
+            border: 1px solid #ddd;
+            padding: 15px;
+        }
+    }
+}

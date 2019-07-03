@@ -1,8 +1,15 @@
 import React from 'react';
-import styles from './styles.module.css'
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import styles from './styles.module.scss'
 
-const Dropdown = ({ children }) => (
-  <div className={styles.dropdown}>{children}</div>
+const Dropdown = ({ children, className }) => (
+  <div className={classnames(styles.dropdown, className )}>{children}</div>
 );
+
+Dropdown.propTypes = {
+  children: PropTypes.any,
+  className: PropTypes.string
+};
 
 export default Dropdown;

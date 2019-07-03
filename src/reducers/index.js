@@ -1,13 +1,20 @@
-import { createReducer } from 'redux-starter-kit'
-import * as actions from '../actions'
+import { createReducer } from 'redux-starter-kit';
+import * as actions from '../actions';
 
 const initialState = {
-  dropdownFilterName: null
+  dropdownFilterName: null,
+  displayingMoreFilters: false
 };
 
 export default createReducer(initialState, {
   [actions.openDropdown]: (state, action) => ({
     ...state,
-    dropdownFilterName: action.payload
+    dropdownFilterName: state.dropdownFilterName === action.payload.filterName ? null : action.payload.filterName,
+    displayingMoreFilters: action.payload.closeMoreFilters ? false : state.displayingMoreFilters
+  }),
+  [actions.showMoreFilters]: (state) => ({
+    ...state,
+    displayingMoreFilters: !state.displayingMoreFilters,
+    dropdownFilterName: false
   })
 })
