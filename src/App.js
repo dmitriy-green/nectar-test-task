@@ -2,6 +2,7 @@ import React from 'react';
 import Filters from './components/Filters';
 import logo from './logo.svg';
 import styles from './App.module.css';
+import './reset.css'
 import filterOptionsData from './zFilterOptions';
 
 const App = () => (
