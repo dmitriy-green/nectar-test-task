@@ -8,7 +8,7 @@ class AppliedFilters extends PureComponent {
     const { appliedFilters, removeFilters } = this.props;
 
     return appliedFilters.map(item => (
-      <li className={styles.item}>
+      <li key={item.id} className={styles.item}>
         <span className={styles.title}>{item.title}</span>
         <button className={styles.removeFilter} onClick={() => removeFilters([item])}>X</button>
       </li>
