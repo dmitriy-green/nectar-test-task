@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './Button.module.scss';
 
 const Button = ({ children, className, onClick }) => (
-  <button className={classnames(styles.button, className)} onClick={onClick}>
+  <button className={classnames('button', styles.button, className)} onClick={onClick}>
     {children}
   </button>
 );

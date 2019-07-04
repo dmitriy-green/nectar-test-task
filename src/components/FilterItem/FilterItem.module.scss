@@ -72,6 +72,12 @@
         padding: 15px;
     }
 
+    .actions {
+        :global(.button) {
+            padding: 15px;
+        }
+    }
+
     :global(.moreItemsDropdown) {
         .subFilterItemList {
             width: 100%;
