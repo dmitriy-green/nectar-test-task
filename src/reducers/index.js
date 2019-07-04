@@ -39,7 +39,7 @@ export default createReducer(initialState, {
     const appliedFilters = state.appliedFilters.filter(af => action.payload.every(f => f.id !== af.id));
 
     return {
-    ...state,
+      ...state,
       appliedFilters,
       selectedFilters: appliedFilters
     }
