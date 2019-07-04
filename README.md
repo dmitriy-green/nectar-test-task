@@ -43,7 +43,7 @@ Thanks!
 
 In the project directory, you can run:
 
-### `npm start`need
+### `npm start`
 
 ### `npm test`
 
