@@ -20,7 +20,7 @@ class FilterItem extends PureComponent {
         >
           {name}
         </Button>
-        {dropdownFilterName === name && (
+        {selected && (
           <Dropdown>
             <ul className={styles.subFilterItemList}>
               {filter.map(subFilter => (
