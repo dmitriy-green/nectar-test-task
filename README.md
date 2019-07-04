@@ -1,6 +1,6 @@
 ## Spent time
 
-~4-5h. I was working on this project for one day with breaks on my other tasks. 
+<4h. I was working on this project for one day with breaks on my other tasks. 
 P.S. I was working using the touchpad as my mouse is broken :D
 
 ## Technologies
