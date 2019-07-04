@@ -12,7 +12,7 @@ class AppliedFilters extends PureComponent {
         <span className={styles.title}>{item.title}</span>
         <button className={styles.removeFilter} onClick={() => removeFilters([item])}>X</button>
       </li>
-    ))
+    ));
   }
 
   render() {
@@ -34,7 +34,7 @@ class AppliedFilters extends PureComponent {
           )
         }
       </div>
-    )
+    );
   }
 }
 
@@ -46,4 +46,4 @@ AppliedFilters.propTypes = {
   removeFilters: PropTypes.func
 };
 
-export default AppliedFilters
+export default AppliedFilters;

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames'
+import classnames from 'classnames';
 import Dropdown from '../Dropdown';
 import Button from '../Button';
 import styles from './FilterItem.module.scss';
@@ -66,4 +66,4 @@ FilterItem.propTypes = {
   applyFilters: PropTypes.func
 };
 
-export default FilterItem
+export default FilterItem;

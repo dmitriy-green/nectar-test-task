@@ -83,4 +83,4 @@ Filters.propTypes = {
   cancelFilters: PropTypes.func
 };
 
-export default Filters
+export default Filters;
