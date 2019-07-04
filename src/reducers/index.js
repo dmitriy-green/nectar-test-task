@@ -2,7 +2,7 @@ import { createReducer } from 'redux-starter-kit';
 import * as actions from '../actions';
 
 const initialState = {
-  dropdownFilterName: null,
+  dropdownFilterName: '',
   displayingMoreFilters: false,
   selectedFilters: [],
   appliedFilters: []
@@ -11,14 +11,14 @@ const initialState = {
 export default createReducer(initialState, {
   [actions.openDropdown]: (state, action) => ({
     ...state,
-    dropdownFilterName: state.dropdownFilterName === action.payload.filterName ? null : action.payload.filterName,
+    dropdownFilterName: state.dropdownFilterName === action.payload.filterName ? '' : action.payload.filterName,
     displayingMoreFilters: action.payload.closeMoreFilters ? false : state.displayingMoreFilters,
     selectedFilters: state.appliedFilters
   }),
   [actions.showMoreFilters]: (state) => ({
     ...state,
     displayingMoreFilters: !state.displayingMoreFilters,
-    dropdownFilterName: false
+    dropdownFilterName: ''
   }),
   [actions.cancelFilters]: (state, action) => ({
     ...state,
@@ -33,7 +33,7 @@ export default createReducer(initialState, {
   [actions.applyFilters]: (state) => ({
     ...state,
     appliedFilters: state.selectedFilters,
-    dropdownFilterName: null
+    dropdownFilterName: ''
   }),
   [actions.removeFilters]: (state, action) => {
     const appliedFilters = state.appliedFilters.filter(af => action.payload.every(f => f.id !== af.id));

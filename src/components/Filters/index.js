@@ -16,11 +16,18 @@ class Filters extends PureComponent {
 
   renderFilterList(insideMoreFiltersDropdown) {
     const {
-      filters, dropdownFilterName, selectedFilters, openDropdown, selectFilter, applyFilters, cancelFilters
+      filters, dropdownFilterName, selectedFilters, appliedFilters, openDropdown, selectFilter, applyFilters, cancelFilters
     } = this.props;
     let list = insideMoreFiltersDropdown ? this.getMoreFiltersKeyList() : Object.keys(filters);
-    const props = { dropdownFilterName, selectedFilters, openDropdown, selectFilter, applyFilters, cancelFilters };
-
+    const props = {
+      dropdownFilterName,
+      selectedFilters,
+      appliedFilters,
+      openDropdown,
+      selectFilter,
+      applyFilters,
+      cancelFilters
+    };
 
     return list.map(name => (
       <li key={name} className={styles.listItem}>
@@ -35,13 +42,15 @@ class Filters extends PureComponent {
   }
 
   render() {
-    const { displayingMoreFilters, selectedFilters, filters } = this.props;
+    const { displayingMoreFilters, appliedFilters, filters } = this.props;
     const filterList = this.renderFilterList(false);
     const filterListInsideMoreFiltersDropdown = this.renderFilterList(true);
-    const moreFiltersActive = this
+    const moreFiltersAppliedItemsQuantity = this
       .getMoreFiltersKeyList()
       .reduce((acc, currVal) => acc.concat(filters[currVal]), [])
-      .some(item => selectedFilters.some(s => s.id === item.id));
+      .filter(item => appliedFilters.some(s => s.id === item.id))
+      .length;
+    const moreFiltersActive = moreFiltersAppliedItemsQuantity > 0;
 
     return (
       <div>
@@ -55,7 +64,7 @@ class Filters extends PureComponent {
                 { [styles.selected]: displayingMoreFilters, [styles.active]: moreFiltersActive }
               )}
             >
-              More filters
+              More filters {moreFiltersActive && `(${moreFiltersAppliedItemsQuantity})`}
             </Button>
             {displayingMoreFilters &&
             <Dropdown className='moreItemsDropdown'>
@@ -72,8 +81,10 @@ class Filters extends PureComponent {
 
 Filters.propTypes = {
   filters: PropTypes.object,
+  dropdownFilterName: PropTypes.string,
   displayingMoreFilters: PropTypes.bool,
   selectedFilters: PropTypes.array,
+  appliedFilters: PropTypes.array,
   removeFilters: PropTypes.func,
   openDropdown: PropTypes.func,
   selectFilter: PropTypes.func,

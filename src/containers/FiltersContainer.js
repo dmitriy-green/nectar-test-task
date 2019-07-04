@@ -4,9 +4,9 @@ import Filters from '../components/Filters';
 import filterOptionsData from '../zFilterOptions';
 
 const mapStateToProps = (state) => {
-  const { displayingMoreFilters, selectedFilters, dropdownFilterName } = state;
+  const { displayingMoreFilters, selectedFilters, appliedFilters, dropdownFilterName } = state;
 
-  return { filters: filterOptionsData, displayingMoreFilters, selectedFilters, dropdownFilterName };
+  return { filters: filterOptionsData, displayingMoreFilters, selectedFilters, appliedFilters, dropdownFilterName };
 };
 
 const mapDispatchToProps = {

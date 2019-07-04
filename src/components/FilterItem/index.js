@@ -7,9 +7,12 @@ import styles from './FilterItem.module.scss';
 
 class FilterItem extends PureComponent {
   render() {
-    const { name, filter, selectedFilters, dropdownFilterName, insideMoreFilters, openDropdown, selectFilter } = this.props;
+    const {
+      name, filter, selectedFilters, appliedFilters, dropdownFilterName, insideMoreFilters, openDropdown, selectFilter
+    } = this.props;
     const selected = dropdownFilterName === name;
     const active = selectedFilters.some(s => filter.some(f => s.id === f.id));
+    const appliedFiltersQuantity = appliedFilters.filter(af => filter.some(f => f.id === af.id)).length;
 
     return (
       <div className={classnames(styles.filterItem, { [styles.selected]: selected })}>
@@ -18,7 +21,7 @@ class FilterItem extends PureComponent {
             styles.filterItemButton, { [styles.selected]: selected, [styles.active]: active })}
           onClick={() => openDropdown({ filterName: name, closeMoreFilters: !insideMoreFilters })}
         >
-          {name}
+          {name} {appliedFiltersQuantity > 0 && `(${appliedFiltersQuantity})`}
         </Button>
         {selected && (
           <Dropdown>
@@ -48,18 +51,18 @@ class FilterItem extends PureComponent {
   }
 }
 
+const subFiltersPropType = PropTypes.arrayOf(PropTypes.shape({
+  id: PropTypes.string,
+  title: PropTypes.string
+}));
+
 FilterItem.propTypes = {
   dropdownFilterName: PropTypes.string,
   name: PropTypes.string,
-  filter: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    title: PropTypes.string
-  })),
+  filter: subFiltersPropType,
   insideMoreFilters: PropTypes.bool,
-  selectedFilters: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    title: PropTypes.string
-  })),
+  appliedFilters: subFiltersPropType,
+  selectedFilters: subFiltersPropType,
   openDropdown: PropTypes.func,
   selectFilter: PropTypes.func,
   cancelFilters: PropTypes.func,
