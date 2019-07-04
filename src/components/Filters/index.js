@@ -38,15 +38,13 @@ class Filters extends PureComponent {
     const { displayingMoreFilters, selectedFilters, filters } = this.props;
     const filterList = this.renderFilterList(false);
     const filterListInsideMoreFiltersDropdown = this.renderFilterList(true);
-    const moreFiltersActive = this.getMoreFiltersKeyList()
-      .reduce(
-        (acc, currVal) => acc.concat(filters[currVal]),
-        []
-      )
+    const moreFiltersActive = this
+      .getMoreFiltersKeyList()
+      .reduce((acc, currVal) => acc.concat(filters[currVal]), [])
       .some(item => selectedFilters.some(s => s.id === item.id));
 
     return (
-      <div className={styles.wrap}>
+      <div>
         <ul className={styles.list}>
           {filterList}
           <li className={classnames(styles.listItem, styles.moreFilters)}>
@@ -61,7 +59,7 @@ class Filters extends PureComponent {
             </Button>
             {displayingMoreFilters &&
             <Dropdown className='moreItemsDropdown'>
-              <ul className={styles.moreFiltersList}>
+              <ul>
                 {filterListInsideMoreFiltersDropdown}
               </ul>
             </Dropdown>}
