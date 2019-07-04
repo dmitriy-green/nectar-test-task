@@ -54,8 +54,13 @@
 }
 
 @media (max-width: 920px) {
+    .filterItem {
+        height: 100%;
+    }
+
     .filterItemButton {
         width: 100%;
+        height: 100%;
         padding: 5px;
     }
 
