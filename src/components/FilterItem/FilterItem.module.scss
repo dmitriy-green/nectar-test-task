@@ -72,6 +72,12 @@
             width: 100%;
         }
 
+        .filterItem {
+            &.selected:after {
+                display: none;
+            }
+        }
+
         .filterItemButton {
             border: none;
             font-size: 18px;
