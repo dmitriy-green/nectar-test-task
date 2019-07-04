@@ -33,7 +33,7 @@ I'm a quick learner and motivated developer who really wants to work with you on
 I'm happy to learn new things and different approaches. I want to be useful. 
 
 At my previous job (online game) I was working on really complicated things, such as Poker, various statistic pages,
-and other staff with a lot of logic and user interactions. I'm sure If you hire me, you will be satisfied with my job.
+and other staff with a lot of logic and user interactions. I'm sure If you hire me, you will be satisfied with my work.
 
 Thanks!
  
