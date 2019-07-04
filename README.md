@@ -19,6 +19,8 @@ because I did not want to risk and went with a standard approach.
 
 I like and use CSSModules (sass), I guess it's the best solution for styles for now.
 
+I prefer to store all app state in redux store rather than splitting it in components state with the exception of such reusable and 
+independent components as selectboxes, checkboxes, etc and in some other cases.
 
 ## Components
 The structure is quite simple. The main components are `AppliedFilters`, `Filters` and `FilterItem`.
